@@ -1,0 +1,62 @@
+/**index.wxss**/
+.index>.buInfo
+{
+  background-color: rgb(43, 177, 43);
+  width: auto;
+  top: 50px;
+  left: 10px;
+  right: 10px;
+  font-weight: normal;
+  color: white;
+  font-size: 1.2em;
+  height: 45px;
+}
+
+.appInfo>.header
+{
+  font-weight: bold
+}
+
+.appInfo>.content
+{
+  color: #000000;
+  font-size: medium
+}
+
+.appInfo>.buReadOver
+{
+  background-color: #fff8f8f8;
+  width: auto;
+  margin-left: 10px;
+  margin-right: 10px;
+  border: 1px solid #ddd;
+  bottom: 20px;
+}
+
+.authorize>.authorizeOK, .authorize>.authorizeCancel
+{
+  width: auto;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-weight: normal;
+  font-size: 1.0em;
+}
+.authorize>.authorizeOK
+{
+  margin-top: 20px;
+  background-color: rgb(43, 177, 43);
+  color: white;
+}
+.authorize>.authorizeCancel
+{
+  margin-top: 10px;
+}
+.authorize>.authorizecontent, .authorize>.header
+{
+  text-align: center;
+}
+.authorize>.authorizecontent>.referer
+{
+  font-size: 0.7em;
+  color: #aaa;
+}
