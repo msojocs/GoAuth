@@ -13,10 +13,10 @@ switch($urlarr['path'])
         $res = updatesk();
         //应用端对获取到的用户数据进行处理，如创建用户等。。。
         if($res)
-            //响应头必须包含   [wechatlogin: ok]
-            header("wechatlogin: ok");
+            //响应头必须包含   [goauth: ok]
+            header("goauth: ok");
         else
-            header("wechatlogin: fail");
+            header("goauth: fail");
         die;
         break;
 

@@ -1,3 +1,3 @@
 <?php
 
-header("wechatlogin: ok");
+header("goauth: ok");

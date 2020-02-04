@@ -16,8 +16,8 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.10.1",
-	"appid": "",
-	"projectname": "WeChatLogin",
+	"appid": "wx3f2f4ff9d9155fc2",
+	"projectname": "GoAuth",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
@@ -52,7 +52,7 @@
 					"id": 0,
 					"name": "扫描小程序码",
 					"pathName": "pages/index/index",
-					"query": "scene=goauth.jysafe.cn@1580714844",
+					"query": "scene=goauth.jysafe.cn@1580725934",
 					"scene": 1047
 				}
 			]

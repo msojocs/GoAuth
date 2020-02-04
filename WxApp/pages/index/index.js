@@ -20,7 +20,7 @@ Page({
     // scene 需要使用 decodeURIComponent 才能获取到生成二维码时传入的 scene
     const scene = decodeURIComponent(query.scene);
     // const scene = encodeURIComponent();
-    // console.log(scene);
+    // console.log(query);
 
     if (scene != undefined && scene.indexOf('@') != -1) {
       // console.log("1");
