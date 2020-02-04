@@ -52,7 +52,7 @@
 					"id": 0,
 					"name": "扫描小程序码",
 					"pathName": "pages/index/index",
-					"query": "scene=goauth.jysafe.cn@1580725934",
+					"query": "scene=goauth.jysafe.cn@1580826973",
 					"scene": 1047
 				}
 			]
