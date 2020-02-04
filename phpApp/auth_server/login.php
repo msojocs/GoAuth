@@ -1,6 +1,6 @@
 <?php
 header("Content-Type: application/json");
-require_once(__DIR__ . "/config/config.php");
+require_once(__DIR__ . "/../config/config.php");
 require_once(__DIR__ . "/easy-http/load.php");
 include_once __DIR__ . "/decryption/wxBizDataCrypt.php";
 

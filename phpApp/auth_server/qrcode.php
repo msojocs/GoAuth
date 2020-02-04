@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . "/config/config.php");
+require_once(__DIR__ . "/../config/config.php");
 require_once(__DIR__ . "/include/class/wechat.class.php");
 header("Content-Type: application/json");
 

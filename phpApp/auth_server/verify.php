@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . "/config/config.php");
+require_once(__DIR__ . "/../config/config.php");
 require_once(__DIR__ . "/include/class/wechat.class.php");
 require_once(__DIR__ . "/easy-http/load.php");
 header("Content-Type: application/json");
@@ -36,9 +36,7 @@ if($domain != null && $userinfo != null && $sk != null){
             $ret['code'] = 245;
             $ret['msg'] = "服务端访问来源域名时出错";
         }
-        // var_dump($res['errors']["http_request_failed"]);
-        // $ret['detail'] = $res;
-    }else if($res['headers']["wechatlogin"] != "ok")
+    }else if($res['headers']["goauth"] != "ok")
     {
         $ret['code'] = 222;
         $ret['msg'] = "来源不承认此次验证";
