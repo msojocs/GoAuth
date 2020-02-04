@@ -2,12 +2,12 @@
 require_once(__DIR__ . '/include/functions.php');
 
 header("Access-Control-Allow-Origin: *");
-$urlarr = parse_url($_SERVER["REQUEST_URI"]);
+$urlInfo = parse_url($_SERVER["REQUEST_URI"]);
 
 // 路由
-switch($urlarr['path'])
+switch($urlInfo['path'])
 {
-        //接收小程序传输的用户信息，更新userinfo
+    //接收小程序传输的用户信息，更新userInfo
     case "/goauth":
         header("Cache-Control: no-store, no-cache, must-revalidate");
         $res = updatesk();
@@ -20,7 +20,7 @@ switch($urlarr['path'])
         die;
         break;
 
-        //生成sk，此生成方法仅供示例使用，生产环境请更改生成方法
+    // 生成sk，此生成方法仅供示例使用，生产环境请更改生成方法
     case "/sk":
         header("Cache-Control: no-store, no-cache, must-revalidate");
         $sk = time();
@@ -34,9 +34,9 @@ switch($urlarr['path'])
 
     // 前端带sk访问请求授权结果
     case "/user":
-        // 取得userinfo
+        // 取得userInfo
         /**
-         * 不一定返回userinfo
+         * 不一定返回userInfo
          * 也可以返回其它信息：比如只表示成功或者失败的字符串，也可以是跳转地址之类的~
          */
         header("Cache-Control: no-store, no-cache, must-revalidate");
