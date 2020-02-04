@@ -40,6 +40,10 @@ if($domain != null && $userinfo != null && $sk != null){
     {
         $ret['code'] = 222;
         $ret['msg'] = "来源不承认此次验证";
+    }else if(!isset($res['headers']["goauth"]))
+    {
+        $ret['code'] = 404;
+        $ret['msg'] = "来源君不知道去哪玩了？";
     }
 }else{
     $ret['code'] = 233;
