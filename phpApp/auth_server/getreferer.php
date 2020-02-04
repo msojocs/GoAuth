@@ -1,7 +1,11 @@
 <?php
 
+// 验证是否由小程序请求
 if(!isset($_SERVER["HTTP_REQUEST_FROM"]) || $_SERVER["HTTP_REQUEST_FROM"] != "GoAuth")
+{
+    header('HTTP/1.1 403 Forbidden');
     die;
+}
 
 header("Content-Type: application/json");
 

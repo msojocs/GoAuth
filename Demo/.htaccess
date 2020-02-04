@@ -14,3 +14,8 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule . /index.php [L]
 </IfModule>
+
+#网站定制化开启 HTTPS 的301重定向
+RewriteCond %{SERVER_PORT} !^443$
+RewriteCond %{HTTP_HOST} goauth.jysafe.cn
+RewriteRule ^.*$ https://goauth.jysafe.cn%{REQUEST_URI} [L,R=301] 

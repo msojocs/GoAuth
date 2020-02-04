@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" type="image/x-icon" href="./assets/favicon.ico" />
+  <title>GoAuth微信扫码登录</title>
+  <meta name="description" content="GoAuth小程序，让应用轻松接入微信扫码登录">
+  <script crossorigin="anonymous" integrity="sha384-9MzmvphdUvLZJKasjD7VqYE4SqffhZDOwDTMyokP2tx+fjBo59ljvrlgUAaaME44" src="//lib.baomitu.com/vue/2.5.17/vue.min.js"></script>
+  <script crossorigin="anonymous" integrity="sha384-U/+EF1mNzvy5eahP9DeB32duTkAmXrePwnRWtuSh1C/bHHhyR1KZCr/aGZBkctpY" src="//lib.baomitu.com/axios/0.18.0/axios.min.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130432908-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-130432908-1');
+  </script>
+
+  <style>
+    /* common */
+
+    body {
+      padding: 0;
+      margin: 0;
+      color: #1e2429;
+      font-size: 16px;
+      font-family: "Dosis", "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      word-break: break-all;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    h3 {
+      font-size: 1.375rem;
+      margin-top: 3.5rem;
+    }
+
+    h4 {
+      white-space: nowrap;
+    }
+
+    a {
+      cursor: pointer;
+      color: #111;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    p {
+      line-height: 2;
+    }
+
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .divider::before {
+      content: '|';
+      margin-left: .5rem;
+      margin-right: .5rem;
+    }
+
+    .bold {
+      font-weight: bold;
+    }
+
+    .pri-color {
+      color: #33A14A;
+    }
+
+    .t-center {
+      text-align: center;
+    }
+
+    .t-gray {
+      color: #666;
+    }
+
+    /* block */
+    [v-clock] {
+      display: none;
+    }
+
+    .header {
+      height: 3.75rem;
+      line-height: 4rem;
+      padding: 0 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .logo {
+      font-size: 1.75rem;
+    }
+
+    .logo img {
+      width: 2rem;
+      margin-top: 1rem;
+      vertical-align: top;
+    }
+
+    .right {
+      float: right;
+    }
+
+    .avatar {
+      width: 2rem;
+      border-radius: 2rem;
+      vertical-align: top;
+      margin-top: 1rem;
+      margin-right: .5rem;
+    }
+
+    .main {
+      padding: 0 1.25rem;
+      min-height: calc(100vh - 18rem);
+    }
+
+    .gallery .item {
+      display: inline-block;
+      width: 33%;
+    }
+
+    .gallery .item h4 {
+      font-size: 1.05rem;
+      margin: 1rem 0 .5rem;
+    }
+
+    .gallery .item-in {
+      padding: 2rem 1.75rem;
+      min-height: 19rem;
+      float: left;
+      width: 100%;
+      margin: .2rem;
+      font-weight: normal;
+      /* background: #f8f8f8; */
+      border-radius: .2rem;
+    }
+
+    .gallery .img {
+      width: 7rem;
+      height: 7rem;
+      margin: 0 auto;
+      line-height: 7rem;
+    }
+
+    .gallery .img img {
+      width: 100%;
+    }
+
+    .item-in h4.number {
+      font-size: 3rem;
+      color: #e5e5e5;
+      margin-bottom: .5rem;
+    }
+
+    .footer {
+      color: #fff;
+      background: #242424;
+      min-height: 4.75rem;
+      padding: 1.625rem 1.25rem;
+      margin-top: 8rem;
+    }
+    .footer a {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    .text-left {
+      text-align: left;
+    }
+
+    .scan-page {
+      position: fixed;
+      padding: 1.25rem 1.25rem 4rem;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      overflow: scroll;
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .scan-page .qrcode {
+      width: 240px;
+      height: 240px;
+      line-height: 240px;
+      text-align: center;
+      background: #f1f1f1;
+      margin: 3rem auto 1rem;
+    }
+
+    .scan-page .qrcode img {
+      width: 100%;
+    }
+
+    .scan-page .close {
+      position: absolute;
+      right: 1.2rem;
+      top: 1.25rem;
+    }
+
+    .userinfo {
+      margin-bottom: 1rem;
+    }
+
+    .mina {
+      margin: 1rem 0;
+    }
+
+    .scan-desc {
+      padding: 2rem 0;
+    }
+
+    .scan-desc-2 {
+      padding: 4rem 0;
+      display: none;
+    }
+
+    @media screen and (max-width: 768px) {
+      .gallery .item {
+        display: inline-block;
+        width: 100%;
+      }
+
+      .sm-hide {
+        display: none;
+      }
+
+      .scan-page .qrcode {
+        margin-top: 18vh;
+      }
+
+      .scan-desc-2 {
+        display: block;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+  <div id="app" v-clock>
+
+    <div class="header">
+      <span class="logo">
+        <img src="./assets/goauth.svg"> GoAuth
+      </span>
+      <span class="right">
+        <a @click="login" v-if="!user.openid">
+          登录演示
+        </a>
+        <a v-else>
+          <img class="avatar small-hide" :src="user.avatarUrl">
+          {{user.nickName}} |
+          <a v-if="user.openid" @click="logout">登出</a>
+        </a>
+        <span class="sm-hide">
+          <span class="divider"></span>
+          <a href="https://github.com/jiyeme/GoAuth">
+            开源代码
+          </a>
+        </span>
+      </span>
+    </div>
+    <div class="main">
+      <div class="wrap">
+
+        <h3 class="t-center">“GoAuth”让应用轻松接入微信扫码登录，点击右上角“登录演示”体验</h3>
+        <p>
+        </p>
+        <p>
+          <b>1.</b> 应用开发者根据GoAuth约定格式（domain@sk）生成登录授权码所需字符串。<br>
+          注：字符串以@分割，其中yourdomain.com是接入应用的业务域名，sk是登录请求校验码（由开发者随机生成，一般会在应用后台进行记录并设置有过期时间，用于和接收到的登录请求中的sk进行比对），字符串总长不能超过32。
+        </p>
+        <p>
+          <b>2.</b> 请求https://api.goauth.jysafe.cn/qrcode?str=yourdomain.com@sk获得base64格式的登录授权码。
+        </p>
+        <p>
+          <b>3.</b> 应用用户打开微信扫一扫，扫描登录授权码后，GoAuth后端将向应用业务域名yourdomain.com发起登录请求（GET方法：https://yourdomain.com/goauth?user=uuu&sk=xxx，注意https协议和固定的/goauth路径），参数user是用户微信信息，sk为登录请求校验码。
+        </p>
+        <p>
+          <b>4.</b> 应用后端接收来自goauth后端的登录请求后根据sk识别登录请求的真伪，从而选择是否信任登录请求，根据当前登录请求中的用户微信信息完成授权登录。
+        </p>
+        <p>
+          <b>安全性：</b>应用后端必须使用https协议，保证传输过程的安全；goauth只负责转发请求，不进行任何形式的数据私自存储；通过登录请求校验码，避免包括goauth在内的任何第三方伪造登录请求。
+        </p>
+
+
+        <div class="t-center">
+          <h3>一些正在使用GoAuth的应用</h3>
+          <div class="gallery">
+            <!--<div class="item">-->
+            <!--  <a class="item-in" href="https://w3c.group" target="_blank">-->
+            <!--    <h4 class="">W3C小组 | 区块链主导的创作者社区</h4>-->
+            <!--    <div class="t-gray text-left">-->
+            <!--      W3c.Group | 让创作者熟悉区块链并真正获益，同时更好地进行社群协作。在小组中分享讨论、交流机会。-->
+            <!--    </div>-->
+            <!--  </a>-->
+            <!--</div>-->
+            <!--<div class="item">-->
+            <!--  <a class="item-in" href="https://gitcafe.net" target="_blank">-->
+            <!--    <h4 class="">极客公园_发现有趣，创造价值</h4>-->
+            <!--    <div class="t-gray text-left">-->
+            <!--      一个分享有趣的安卓APP和实用的WordPress技术以及Windows使用技巧的网站。-->
+            <!--    </div>-->
+            <!--  </a>-->
+            <!--</div>-->
+            <div class="item">
+              <div class="item-in">
+                <h4 class="number">1</h4>
+                <p class="t-gray">
+                  接入GoAuth的应用可申请展示
+                </p>
+              </div>
+            </div>
+            <div class="item">
+              <div class="item-in">
+                <h4 class="number">2</h4>
+                <p class="t-gray">
+                  接入GoAuth的应用可申请展示
+                </p>
+              </div>
+            </div>
+            <div class="item">
+              <div class="item-in">
+                <h4 class="number">3</h4>
+                <p class="t-gray">
+                  接入GoAuth的应用可申请展示
+                </p>
+              </div>
+            </div>
+          </div>
+
+          
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer t-center">
+      <div class="wrap">
+        Copyright © 2020 jysafe.cn
+        <span v-if="running" class="status">
+        
+          GoAuth小程序于2020年2月3日正式上线，已正常运行 <b>{{running}}</b>
+        </span>
+        <span class="divider"></span>
+
+        <a href="https://www.jysafe.cn/" target="_blank">联系方式</a>
+      </div>
+    </div>
+
+    <div class="scan-page" v-if="scaning">
+      <div class="qrcode" id="qrcode">
+        <span v-if="loading">loading...</span>
+        <img v-else :src="qrcode" alt="goauth login">
+      </div>
+      <div class="t-center">
+        <div class="sm-hide scan-desc">使用<b>微信扫一扫</b>授权码完成登录</div>
+        <div class="scan-desc-2">将授权码<b>保存为截图，微信扫一扫</b>完成登录</div>
+        <!-- <div class="mina">
+          <img width="270" height="270" src="./assets/mina.jpg">
+        </div> -->
+      </div>
+      <a class="close" @click="closeScan">返回主页</a>
+    </div>
+  </div>
+  <script>
+    // 请使用websocket代替setInterval
+    var _getUser = null
+    var _loginTimeout = null
+    new Vue({
+      el: '#app',
+      data: {
+        running: true,
+        scaning: false,
+        loading: false,
+        qrcode: '',
+        user: {}
+      },
+      methods: {
+        login: function() {
+          var self = this
+          self.scaning = true
+          _loginTimeout = setTimeout(function() {
+            self.scaning = false
+          }, 70000)
+          self.loading = true
+          // 
+          axios.get('https://goauth.jysafe.cn/sk').then(function(skRes) {
+            var str = 'goauth.jysafe.cn@' + skRes.data.sk
+            // 获取登录码
+            axios.get('https://api.goauth.jysafe.cn/qrcode?str=' + str).then(function(res) {
+              // 渲染码
+              self.qrcode = res.data.qrcode
+              self.loading = false
+
+              clearInterval(_getUser)
+              _getUser = setInterval(function() {
+                axios.get('https://goauth.jysafe.cn/user?sk=' + skRes.data.sk).then(function(userRes) {
+                  var user = userRes.data.user
+                  var code = userRes.data.code
+                  if (code == 200) {
+                    clearTimeout(_loginTimeout)
+                    user = JSON.parse(user)
+                    self.user = user
+                    clearInterval(_getUser)
+                    self.scaning = false
+                    alert('登录成功')
+                  }
+                })
+              }, 1300)
+
+            })
+          })
+        },
+        logout: function() {
+          location.reload()
+        },
+        closeScan: function() {
+          this.scaning = false
+          clearInterval(_getUser)
+        }
+      },
+      created() {
+        if (this.running) {
+          var startTime = 1580659200000
+          var timeInterval = new Date().getTime() - startTime
+          var day = parseInt(timeInterval / 86400000)
+          var hour = parseInt((timeInterval % 86400000) / 3600000)
+          this.running = day + '天' + hour + '小时'
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

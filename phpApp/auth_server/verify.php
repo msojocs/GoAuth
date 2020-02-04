@@ -1,7 +1,6 @@
 <?php
 require_once(__DIR__ . "/config/config.php");
 require_once(__DIR__ . "/include/class/wechat.class.php");
-require_once __DIR__ . '/easy-http/EasyHttp.php';
 require_once(__DIR__ . "/easy-http/load.php");
 header("Content-Type: application/json");
 
