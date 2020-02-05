@@ -5,7 +5,7 @@ request_verify();
 
 header("Content-Type: application/json");
 
-$domain = get_query('domain');
+$domain = queryGET('domain');
 
 if($domain === null)
 {

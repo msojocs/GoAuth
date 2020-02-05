@@ -41,7 +41,7 @@ function request_verify()
  * 
  * @return $value string|null 成功返回参数值，失败返回null
  */
-function get_query($key)
+function queryGET($key)
 {
     $value = isset($_GET[$key])?$_GET[$key]:null;
     return $value;

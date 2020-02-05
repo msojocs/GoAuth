@@ -8,9 +8,9 @@ header("Content-Type: application/json");
 request_verify();
 
 //取参数
-$jscode = get_query('jscode');
-$iv = get_query('iv');
-$encryptedData = get_query('encryptedData');
+$jscode = queryGET('jscode');
+$iv = queryGET('iv');
+$encryptedData = queryGET('encryptedData');
 
 if($jscode == null || $iv == null || $encryptedData == null)
 {
