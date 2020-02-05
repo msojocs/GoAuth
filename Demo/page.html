@@ -285,7 +285,7 @@
           <b>2.</b> 请求https://api.goauth.jysafe.cn/qrcode?str=yourdomain.com@sk获得base64格式的登录授权码。
         </p>
         <p>
-          <b>3.</b> 应用用户打开微信扫一扫，扫描登录授权码后，GoAuth后端将向应用业务域名yourdomain.com发起登录请求（GET方法：https://yourdomain.com/goauth?user=uuu&sk=xxx，注意https协议和固定的/goauth路径），参数user是用户微信信息，sk为登录请求校验码。
+          <b>3.</b> 应用用户打开微信扫一扫，扫描登录授权码后，GoAuth后端将向应用业务域名yourdomain.com发起登录请求（GET方法：https://yourdomain.com/goauth?userinfo=uuu&sk=xxx，注意https协议和固定的/goauth路径），参数userinfo是用户微信信息，sk为登录请求校验码。
         </p>
         <p>
           <b>4.</b> 应用后端接收来自goauth后端的登录请求后根据sk识别登录请求的真伪，从而选择是否信任登录请求，根据当前登录请求中的用户微信信息完成授权登录。<br>
