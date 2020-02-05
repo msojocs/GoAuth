@@ -1,7 +1,7 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 $urlarr = parse_url($_SERVER["REQUEST_URI"]);
-include_once 'auth_server/load.php';
+include_once 'goauth_server/load.php';
 
 //路由
 switch ($urlarr['path']) {
