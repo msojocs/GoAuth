@@ -7,4 +7,4 @@ define('APP_ID', '');
 define('APP_SECRET', '');
 
 //版本号，别乱动
-define('VER', '1.0.0');
+define('VER', '1.0.1');

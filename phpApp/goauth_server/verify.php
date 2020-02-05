@@ -4,14 +4,8 @@
 // require_once(__DIR__ . "/easy-http/load.php");
 header("Content-Type: application/json");
 
-
 // 验证是否由小程序请求
 request_verify();
-
-$ret = array(
-    'code' => 200,
-    'msg' => 'success'
-    );
     
 $domain = isset($_GET['domain'])?$_GET['domain']:null;
 $userinfo = isset($_GET['userinfo'])?$_GET['userinfo']:null;
@@ -26,20 +20,28 @@ if($domain != null && $userinfo != null && $sk != null){
         $res = json_decode($res, true);
         if($res['errors']["http_request_failed"][0] == "SSL certificate problem: self signed certificate")
         {
-            $ret['code'] = 244;
-            $ret['msg'] = "服务端通过HTTPS访问来源域名时出错";
+            $ret = array(
+                'code' => 244,
+                'msg' => '服务端通过HTTPS访问来源域名时出错'
+                );
         }else{
-            $ret['code'] = 245;
-            $ret['msg'] = "服务端访问来源域名时出错";
+            $ret = array(
+                'code' => 245,
+                'msg' => '服务端访问来源域名时出错'
+                );
         }
-    }else if($res['headers']["goauth"] != "ok")
+    }else if($res['headers']["goauth"] == "ok")
     {
-        $ret['code'] = 222;
-        $ret['msg'] = "来源不承认此次验证";
-    }else if(!isset($res['headers']["goauth"]))
+        $ret = array(
+            'code' => 200,
+            'msg' => 'success'
+            );
+    }else
     {
-        $ret['code'] = 404;
-        $ret['msg'] = "来源君不知道去哪玩了？";
+        $ret = array(
+            'code' => 222,
+            'msg' => '来源不承认此次验证'
+            );
     }
 }else{
     $ret['code'] = 233;
