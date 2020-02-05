@@ -1,7 +1,9 @@
 <?php
 class WeChat_MiNi
 {
+    //小程序 APP_ID
     private $appId = "";
+    //小程序 APP_Secret
     private $appSecret = "";
     private $accessToken = "";
 
@@ -44,12 +46,12 @@ class WeChat_MiNi
     public function codeGetUnlimited($str) {
         $url = "https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=" . $this->accessToken;
 
-        //参数
+        //构造参数
         $param = "{\"scene\": \"$str\"}";
 
         $ret = $this->postUrl($url, $param);
         if (is_null(json_decode($ret))) {
-            //不是json数据   有数据流  json_decode($codeinfo)返回值为 null
+            //非json数据   有数据流  json_decode($codeinfo)返回值为 null
             $type = getimagesizefromstring($ret)['mime']; //获取二进制流图片格式
             $base64String = 'data:' . $type . ';base64,' . base64_encode($ret);
             

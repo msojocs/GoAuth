@@ -1,22 +1,18 @@
 <?php
-require_once(__DIR__ . "/../config/config.php");
-require_once(__DIR__ . "/include/class/wechat.class.php");
-require_once(__DIR__ . "/easy-http/load.php");
+// require_once(__DIR__ . "/../config/config.php");
+// require_once(__DIR__ . "/include/class/wechat.class.php");
+// require_once(__DIR__ . "/easy-http/load.php");
 header("Content-Type: application/json");
+
+
+// 验证是否由小程序请求
+request_verify();
 
 $ret = array(
     'code' => 200,
     'msg' => 'success'
     );
     
-if(!isset($_SERVER["HTTP_REQUEST_FROM"]) || $_SERVER["HTTP_REQUEST_FROM"] != "GoAuth")
-{
-    $ret['code'] = 403;
-    $ret['msg'] = "非法请求";
-    echo json_encode($ret);
-    die;
-}
-
 $domain = isset($_GET['domain'])?$_GET['domain']:null;
 $userinfo = isset($_GET['userinfo'])?$_GET['userinfo']:null;
 $sk = isset($_GET['sk'])?$_GET['sk']:null;
@@ -51,15 +47,3 @@ if($domain != null && $userinfo != null && $sk != null){
 }
 
 echo json_encode($ret);
-
-//CURL GET
-function getUrl($url) {
-    $http = new EasyHttp();
-    $response = $http->request($url, array(
-        'method' => 'GET',        //	GET/POST
-        'timeout' => 5,            //	超时的秒数
-        'redirection' => 0
-    ));
-    return $response;
-}
-

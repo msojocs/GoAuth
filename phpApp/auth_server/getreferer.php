@@ -1,15 +1,22 @@
 <?php
 
 // 验证是否由小程序请求
-if(!isset($_SERVER["HTTP_REQUEST_FROM"]) || $_SERVER["HTTP_REQUEST_FROM"] != "GoAuth")
-{
-    header('HTTP/1.1 403 Forbidden');
-    die;
-}
+request_verify();
 
 header("Content-Type: application/json");
 
-$domain = isset($_GET['domain'])?$_GET['domain']:null;
+$domain = get_query('domain');
+
+if($domain === null)
+{
+    $ret = array(
+        'code' => 233,
+        'msg' => '参数异常'
+        );
+    echo json_encode($ret);
+    die;
+}
+
 $referer = array(
     'name' => null
     );
