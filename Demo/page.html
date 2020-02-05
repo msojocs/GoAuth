@@ -243,6 +243,14 @@
         display: block;
       }
     }
+    code{
+      padding: .2em .4em;
+      margin: 0;
+      font-size: 85%;
+      background-color: rgba(27,31,35,.05);
+      border-radius: 3px;
+      font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+    }
   </style>
 
 </head>
@@ -278,18 +286,18 @@
         <p>
         </p>
         <p>
-          <b>1.</b> 应用开发者根据GoAuth约定格式（domain@sk）生成登录授权码所需字符串。<br>
-          注：字符串以@分割，其中yourdomain.com是接入应用的业务域名，sk是登录请求校验码（由开发者随机生成，一般会在应用后台进行记录并设置有过期时间，用于和接收到的登录请求中的sk进行比对），字符串总长不能超过32。
+          <b>1.</b> 应用开发者根据GoAuth约定格式（<code>domain@sk</code>）生成登录授权码所需字符串。<br>
+          注：字符串以<code>@</code>分割，其中<code>domain</code>是接入应用的业务域名，<code>sk</code>是登录请求校验码（由开发者随机生成，一般会在应用后台进行记录并设置有过期时间，用于和接收到的登录请求中的<code>sk</code>进行比对），字符串总长不能超过32。
         </p>
         <p>
-          <b>2.</b> 请求https://api.goauth.jysafe.cn/qrcode?str=yourdomain.com@sk获得base64格式的登录授权码。
+          <b>2.</b> 请求<code>https://api.goauth.jysafe.cn/qrcode?str=yourdomain.com@sk</code>获得base64格式的登录授权码。
         </p>
         <p>
-          <b>3.</b> 应用用户打开微信扫一扫，扫描登录授权码后，GoAuth后端将向应用业务域名yourdomain.com发起登录请求（GET方法：https://yourdomain.com/goauth?userinfo=uuu&sk=xxx，注意https协议和固定的/goauth路径），参数userinfo是用户微信信息，sk为登录请求校验码。
+          <b>3.</b> 应用用户打开微信扫一扫，扫描登录授权码后，GoAuth后端将向应用业务域名domain发起登录请求（GET方法：<code>https://yourdomain.com/goauth?userinfo=uuu&sk=xxx</code>，注意https协议和固定的<code>/goauth</code>路径），参数<code>userinfo</code>是用户微信信息，<code>sk</code>为登录请求校验码。
         </p>
         <p>
-          <b>4.</b> 应用后端接收来自goauth后端的登录请求后根据sk识别登录请求的真伪，从而选择是否信任登录请求，根据当前登录请求中的用户微信信息完成授权登录。<br>
-          PS：应用后端若信任请求请在响应头中添加  goauth: ok  ;否则请在响应头中添加 goauth: fail
+          <b>4.</b> 应用后端接收来自goauth后端的登录请求后根据<code>sk</code>识别登录请求的真伪，从而选择是否信任登录请求，根据当前登录请求中的用户微信信息完成授权登录。<br>
+          PS：应用后端若信任请求请在响应头中添加<code> goauth: ok  </code>;否则请在响应头中添加<code> goauth: fail</code>
         </p>
         <p>
           <b>安全性：</b>应用后端必须使用https协议，保证传输过程的安全；goauth只负责转发请求，不进行任何形式的数据私自存储；通过登录请求校验码，避免包括goauth在内的任何第三方伪造登录请求。
@@ -299,14 +307,14 @@
         <div class="t-center">
           <h3>一些正在使用GoAuth的应用</h3>
           <div class="gallery">
-            <!--<div class="item">-->
-            <!--  <a class="item-in" href="https://w3c.group" target="_blank">-->
-            <!--    <h4 class="">W3C小组 | 区块链主导的创作者社区</h4>-->
-            <!--    <div class="t-gray text-left">-->
-            <!--      W3c.Group | 让创作者熟悉区块链并真正获益，同时更好地进行社群协作。在小组中分享讨论、交流机会。-->
-            <!--    </div>-->
-            <!--  </a>-->
-            <!--</div>-->
+            <div class="item">
+              <a class="item-in" href="https://www.jysafe.cn" target="_blank">
+                <h4 class="">祭夜の咖啡馆|我很好奇！</h4>
+                <div class="t-gray text-left">
+                  祭夜の咖啡馆| 有空来喝杯咖啡吧
+                </div>
+              </a>
+            </div>
             <!--<div class="item">-->
             <!--  <a class="item-in" href="https://gitcafe.net" target="_blank">-->
             <!--    <h4 class="">极客公园_发现有趣，创造价值</h4>-->
@@ -315,14 +323,6 @@
             <!--    </div>-->
             <!--  </a>-->
             <!--</div>-->
-            <div class="item">
-              <div class="item-in">
-                <h4 class="number">1</h4>
-                <p class="t-gray">
-                  接入GoAuth的应用可申请展示
-                </p>
-              </div>
-            </div>
             <div class="item">
               <div class="item-in">
                 <h4 class="number">2</h4>
@@ -357,7 +357,7 @@
         </span>
         <span class="divider"></span>
 
-        <a href="https://www.jysafe.cn/" target="_blank">联系方式</a>
+        <a href="tencent://message/?uin=1690127128&Site=&Menu=yes" target="_blank" title="QQ">联系方式</a>
       </div>
     </div>
 

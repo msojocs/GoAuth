@@ -8,31 +8,31 @@ switch ($urlarr['path']) {
 
     // 请求小程序码
     case '/qrcode':
-        require 'auth_server/qrcode.php';
+        require 'goauth_server/qrcode.php';
         exit;
         break;
 
     // 验证
     case '/verify':
-        require 'auth_server/verify.php';
+        require 'goauth_server/verify.php';
         exit;
         break;
 
     // Test
     case '/goauth':
-        require 'auth_server/test.php';
+        require 'goauth_server/test.php';
         exit;
         break;
 
     // 获取来源域名信息
     case '/getreferer':
-        require 'auth_server/getreferer.php';
+        require 'goauth_server/getreferer.php';
         exit;
         break;
 
     // 获取openid
     case '/login':
-        require 'auth_server/login.php';
+        require 'goauth_server/login.php';
         exit;
         break;
 }
