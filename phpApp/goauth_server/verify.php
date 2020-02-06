@@ -1,7 +1,4 @@
 <?php
-// require_once(__DIR__ . "/../config/config.php");
-// require_once(__DIR__ . "/include/class/wechat.class.php");
-// require_once(__DIR__ . "/easy-http/load.php");
 header("Content-Type: application/json");
 
 // 验证是否由小程序请求
@@ -12,6 +9,7 @@ $userinfo = isset($_GET['userinfo'])?$_GET['userinfo']:null;
 $sk = isset($_GET['sk'])?$_GET['sk']:null;
 
 if($domain != null && $userinfo != null && $sk != null){
+    $sk = urlencode($sk);
     $url = "https://$domain/goauth?userinfo=$userinfo&sk=$sk";
     $res = getUrl($url);
     if(is_object($res))
