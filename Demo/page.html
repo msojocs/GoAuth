@@ -288,7 +288,7 @@
         <p>
           <b>1.</b> 应用开发者根据GoAuth约定格式（<code>domain@sk</code>）生成登录授权码所需字符串。<br>
           注：字符串以<code>@</code>分割，其中<code>domain</code>是接入应用的业务域名，<code>sk</code>是登录请求校验码（由开发者随机生成，一般会在应用后台进行记录并设置有过期时间，用于和接收到的登录请求中的<code>sk</code>进行比对），字符串总长不能超过32。
-          PS：只支持数字，大小写英文以及部分特殊字符：<code>!#$&'()*+,/:;=?@-._~</code>，其它字符请自行编码为合法字符（因不支持%，中文无法使用 urlencode 处理，请使用其他编码方式）
+          PS：只支持数字，大小写英文以及部分特殊字符：<code>!#$&'()*+,/:;=?-._~</code>，其它字符请自行编码为合法字符（因不支持%，中文无法使用 urlencode 处理，请使用其他编码方式）
         </p>
         <p>
           <b>2.</b> 请求<code>https://api.goauth.jysafe.cn/qrcode?str=yourdomain.com@sk</code>获得base64格式的登录授权码。
