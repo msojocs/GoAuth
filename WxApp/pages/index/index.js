@@ -124,7 +124,6 @@ Page({
   //确认授权
   authorizeOK: function()
   {
-    this.showBusy();
     // 登录
     wx.login({
       success: res => {
@@ -138,6 +137,7 @@ Page({
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
+          this.showBusy();
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
             success: res => {

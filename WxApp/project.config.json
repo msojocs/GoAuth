@@ -54,6 +54,13 @@
 					"pathName": "pages/index/index",
 					"query": "scene=goauth.jysafe.cn@1581215418",
 					"scene": 1047
+				},
+				{
+					"id": -1,
+					"name": "pages/logs/logs",
+					"pathName": "pages/logs/logs",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

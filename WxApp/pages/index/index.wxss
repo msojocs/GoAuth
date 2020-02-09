@@ -1,15 +1,30 @@
 /**index.wxss**/
-.index>.buInfo
+/** 修改button默认的点击态样式类**/
+.button-hover {
+  background-color: red;
+}
+/** 添加自定义button点击态样式类**/
+.other-button-hover {
+  background-color: blue;
+}
+button {
+  margin: 10px;
+}
+.goauthicon {
+  width: 149px;
+  height: 149px;
+  position: absolute;
+  left: 44%;
+  top: 21%;
+  margin-left: -60px;
+  margin-top: -20px;
+}
+
+.buInfo
 {
-  background-color: rgb(43, 177, 43);
-  width: auto;
-  top: 50px;
-  left: 10px;
-  right: 10px;
-  font-weight: normal;
-  color: white;
-  font-size: 1.2em;
-  height: 45px;
+  position: absolute;
+  top: 52%;
+  width: 95%;
 }
 
 .appInfo>.header
@@ -33,19 +48,10 @@
   bottom: 20px;
 }
 
-.authorize>.authorizeOK, .authorize>.authorizeCancel
-{
-  width: auto;
-  margin-left: 10px;
-  margin-right: 10px;
-  font-weight: normal;
-  font-size: 1.0em;
-}
+
 .authorize>.authorizeOK
 {
   margin-top: 20px;
-  background-color: rgb(43, 177, 43);
-  color: white;
 }
 .authorize>.authorizeCancel
 {
@@ -54,6 +60,10 @@
 .authorize>.authorizecontent, .authorize>.header
 {
   text-align: center;
+}
+.authorize>.header
+{
+  font-size: 2em
 }
 .authorize>.authorizecontent>.referer
 {
