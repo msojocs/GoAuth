@@ -70,8 +70,7 @@ Page({
   buInfo: function(e)
   {
     this.setData ({
-      action: "appInfo",
-      appContent: "\n登录演示和实例代码可在GoAuth主页(goauth.jysafe.cn)获得\n\n1.阁下需根据GoAuth约定格式-->(domain@sk)<--生成登录授权码所需字符串。\n注：字符串以@分割，其中domain是欲接入应用的域名，sk是登录请求校验码（由阁下随机生成，一般会在应用后台进行记录并设置有过期时间，用于与接收到的登录请求中的sk进行比对），字符串总长不超过32。\n\n2.请求https://api.goauth.jysafe.cn/qrcode?str=domain@sk获得base64格式的登录码。\n\n3.用户打开微信扫一扫，扫描登录请求校验码后，GoAuth后端将向欲接入应用的域名domain发起登录请求（GET  https://domain/goauth?userinfo=***&sk=***，注意https协议和固定的 /goauth 路径），userinfo为用户微信信息，sk为登录请求校验码。\n\n4.阁下的应用后端接收来自GoAuth后端的登录请求后根据sk识别登录请求的真伪，从而选择是否信任登录请求，根据当前登录请求中的用户微信信息完成授权登录。\n\n安全性：应用后端必须使用HTTPS协议，保证传输过程的安全性；GoAuth只负责转发请求，不进行任何形式的数据私自存储；通过请求校验码避免包括GoAuth在内的任何第三方伪造登录。\n\n补充说明：GoAuth是作者根据weauth的实现逻辑创建的，旨在避免weauth停止服务后无法继续使用微信登录的可能性。授权界面图标来源于(阿里巴巴矢量图标库-->__棂婳)本项目将实行开源。\n\n\n\n\n"
+      action: "appInfo"
     })
   },
   //看完食用指南了
@@ -227,11 +226,11 @@ Page({
     })
   },
   showError: function (code, msg) {
-    // switch(code)
-    // {
-    //   default:
-    //     break;
-    // }
+    switch(code)
+    {
+      default:
+        break;
+    }
     wx.showToast({
       title: msg + '\n错误码' + code,
       mask: true,
