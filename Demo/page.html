@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="baidu-site-verification" content="LyVBasB2QC" />
   <link rel="shortcut icon" type="image/x-icon" href="./assets/favicon.ico" />
   <title>GoAuth微信扫码登录</title>
   <meta name="description" content="GoAuth小程序，让应用轻松接入微信扫码登录">
@@ -370,6 +371,7 @@
       <div class="t-center">
         <div class="sm-hide scan-desc">使用<b>微信扫一扫</b>授权码完成登录</div>
         <div class="scan-desc-2">将授权码<b>保存为截图，微信扫一扫</b>完成登录</div>
+        <span id="scene"></span>
         <!-- <div class="mina">
           <img width="270" height="270" src="./assets/mina.jpg">
         </div> -->
@@ -401,12 +403,13 @@
           // 
           axios.get('https://goauth.jysafe.cn/sk').then(function(skRes) {
             var str = 'goauth.jysafe.cn@' + skRes.data.sk
+            document.getElementById("scene").innerText = str;
             // 获取登录码
             axios.get('https://api.goauth.jysafe.cn/qrcode?str=' + str).then(function(res) {
               // 渲染码
               self.qrcode = res.data.qrcode
               self.loading = false
-
+                
               clearInterval(_getUser)
               _getUser = setInterval(function() {
                 axios.get('https://goauth.jysafe.cn/user?sk=' + skRes.data.sk).then(function(userRes) {

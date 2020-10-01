@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
-
+const debug = true;
 Page({
   data: {
     userInfo: {},
@@ -114,6 +114,82 @@ Page({
       }
     })
   },
+  // 验证结果
+  loginVerify: function(temp_arr)
+  {
+    if(debug)console.log("验证结果")
+    wx.request({
+      url: 'https://api.goauth.jysafe.cn/verify', //验证接口
+      data: {
+        domain: temp_arr[0],
+        sk: temp_arr[1],
+        userinfo: app.globalData.userInfo
+      },
+      header: {
+        'content-type': 'application/json', 
+        'request-from': 'GoAuth'
+      },
+      success: res => {
+        if (res.data.code == 200) {
+          this.showSuccess();
+          this.setData({
+            action: "index"
+          })
+        } else {
+          this.showError(res.data.code, res.data.msg);
+        }
+      }
+    })
+  },
+  login: function(){
+    new Promise((resolve, reject)=>{
+      wx.getUserInfo({
+        success: res => {
+          // 储存用户信息
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          })
+          // 发送 res.code 到后台换取 openId, sessionKey, unionId
+          wx.request({
+            url: 'https://api.goauth.jysafe.cn/login', //登录接口
+            data: {
+              jscode: app.globalData.jscode,
+              iv    : res.iv,
+              encryptedData: res.encryptedData
+            },
+            header: {
+              'content-type': 'application/json', 
+              'request-from': 'GoAuth'
+            },
+            success: res => {
+              if (res.data.code != 200)
+              {
+                reject(res);
+              }
+              app.globalData.userInfo.openid = res.data.openid;
+              app.globalData.userInfo.unionid = res.data.unionid;
+              //验证请求
+              var temp_arr = app.globalData.str.split('@');
+              resolve(temp_arr);
+            }
+          })
+
+          // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+          // 所以此处加入 callback 以防止这种情况
+          if (this.userInfoReadyCallback) {
+            this.userInfoReadyCallback(res)
+          }
+          
+        }
+      })
+    }).then((success)=>{
+      this.loginVerify(success); 
+    }).catch((err)=>{
+      this.showError(err.data.code, err.data.msg);
+    })
+  },
   //取消授权
   authorizeCancel: function()
   {
@@ -139,70 +215,7 @@ Page({
         if (res.authSetting['scope.userInfo']) {
           this.showBusy();
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              // 储存用户信息
-              app.globalData.userInfo = res.userInfo
-              this.setData({
-                userInfo: res.userInfo,
-                hasUserInfo: true
-              })
-              // 发送 res.code 到后台换取 openId, sessionKey, unionId
-              wx.request({
-                url: 'https://api.goauth.jysafe.cn/login', //登录接口
-                data: {
-                  jscode: app.globalData.jscode,
-                  iv    : res.iv,
-                  encryptedData: res.encryptedData
-                },
-                header: {
-                  'content-type': 'application/json', 
-                  'request-from': 'GoAuth'
-                },
-                success: res => {
-                  if (res.data.code != 200)
-                  {
-                    this.showError(res.data.code, res.data.msg);
-                    return;
-                  }
-                  app.globalData.userInfo.openid = res.data.openid;
-                  app.globalData.userInfo.unionid = res.data.unionid;
-                  //验证请求
-                  var temp_arr = app.globalData.str.split('@');
-                  wx.request({
-                    url: 'https://api.goauth.jysafe.cn/verify', //验证接口
-                    data: {
-                      domain: temp_arr[0],
-                      sk: temp_arr[1],
-                      userinfo: app.globalData.userInfo
-                    },
-                    header: {
-                      'content-type': 'application/json', 
-                      'request-from': 'GoAuth'
-                    },
-                    success: res => {
-                      if (res.data.code == 200) {
-                        this.showSuccess();
-                        this.setData({
-                          action: "index"
-                        })
-                      } else {
-                        this.showError(res.data.code, res.data.msg);
-                      }
-                    }
-                  })
-                }
-              })
-
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
-              }
-
-              
-            }
-          })
+          this.login();
         }
       }
     })

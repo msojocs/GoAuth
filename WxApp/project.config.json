@@ -5,18 +5,27 @@
 	},
 	"setting": {
 		"urlCheck": true,
+		"scopeDataCheck": false,
+		"coverView": true,
 		"es6": true,
 		"postcss": true,
+		"compileHotReLoad": false,
+		"preloadBackgroundData": false,
 		"minified": true,
-		"newFeature": true,
 		"autoAudits": false,
-		"coverView": true,
-		"showShadowRootInWxmlPanel": true,
-		"scopeDataCheck": false
+		"newFeature": true,
+		"uglifyFileName": false,
+		"uploadWithSourceMap": true,
+		"useIsolateContext": true,
+		"nodeModules": false,
+		"enhance": false,
+		"useCompilerModule": false,
+		"userConfirmedUseCompilerModuleSwitch": false,
+		"showShadowRootInWxmlPanel": true
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.10.1",
-	"appid": "wx3f2f4ff9d9155fc2",
+	"appid": "",
 	"projectname": "GoAuth",
 	"debugOptions": {
 		"hidedInDevtools": []
@@ -52,7 +61,7 @@
 					"id": 0,
 					"name": "扫描小程序码",
 					"pathName": "pages/index/index",
-					"query": "scene=goauth.jysafe.cn@1581215418",
+					"query": "scene=goauth.jysafe.cn@1601471037",
 					"scene": 1047
 				},
 				{

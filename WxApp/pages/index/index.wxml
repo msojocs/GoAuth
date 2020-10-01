@@ -10,8 +10,8 @@
   </view>
   <view>
     <button type="primary" size="default" class="buInfo" bindtap="buInfo" >GoAuth食用说明 </button>
-    <text style="position: absolute;left: 39%;bottom: 21%;">\n\n\n\n\nVer:1.0.2</text>
-    <text style="position: absolute;left: 35%;bottom: 16%;">\n2020-02-09</text>
+    <text style="position: absolute;left: 39%;bottom: 21%;">\n\n\n\n\nVer:1.0.3</text>
+    <text style="position: absolute;left: 35%;bottom: 16%;">\n2020-09-30</text>
   </view>
 </view>
 
