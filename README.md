@@ -52,7 +52,7 @@ DEMO下的文件全丢到某服务器根目录下，将空数据库上传，配�
 
 | 支付宝 | 微信 |
 | ------- | ----- |
-|![支付宝打赏](https://raw.githubusercontent.com/jiyeme/GoAuth/master/pic/AliPay.jpg)|![微信打赏](https://raw.githubusercontent.com/jiyeme/GoAuth/master/pic/WeChat.png)|
+|![支付宝打赏](https://raw.githubusercontent.com/msojocs/GoAuth/master/pic/AliPay.jpg)|![微信打赏](https://raw.githubusercontent.com/msojocs/GoAuth/master/pic/WeChat.png)|
 
 ----
 结束
